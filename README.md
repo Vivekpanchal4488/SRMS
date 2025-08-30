@@ -1,7 +1,7 @@
 # 📝 Student Result Management System (SRMS)
 
 A simple **Java console-based project** to manage student results.  
-This project demonstrates **Java fundamentals, Arrays, Loops, Functions, Sorting, Searching, Strings and Basic DSA (Bubble Sort)** while performing operations like adding students, sorting, topper finding, and calculating average marks.  
+This project demonstrates **Java fundamentals, Arrays, Loops, Functions, Sorting, Searching, Strings ** while performing operations like adding students, sorting, topper finding, and calculating average marks.  
 
 ---
 
