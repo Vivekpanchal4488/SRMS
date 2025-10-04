@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .result-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .result-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .section {
+            min-height: calc(100vh - 200px);
+            padding-bottom: 200px;
+        }
+
+        .fixed-footer {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .py-12 {
+            padding-top: 3rem;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen gradient-bg">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-purple-600 text-2xl"></i>
+                    <span class="text-xl font-bold text-gray-800">SRMS</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="showSection('home')"
+                        class="text-gray-600 hover:text-purple-600 transition-colors font-semibold">Home</button>
+                    <button onclick="showSection('results')"
+                        class="text-gray-600 hover:text-purple-600 transition-colors font-semibold">View
+                        Results</button>
+                    <button onclick="showSection('admin')"
+                        class="text-gray-600 hover:text-purple-600 transition-colors font-semibold">Admin Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Student Result Management System
+                </h1>
+                <p class="text-xl text-white opacity-90 mb-8 max-w-3xl mx-auto">
+                    Streamline your academic results management with our comprehensive platform.
+                    Easy access for students and powerful tools for administrators.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showSection('results')"
+                        class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors pulse-animation">
+                        <i class="fas fa-search mr-2"></i>Check Your Results
+                    </button>
+                    <button onclick="showSection('admin')"
+                        class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors">
+                        <i class="fas fa-lock mr-2"></i>Admin Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Why Choose Our System - Added back to home page -->
+            <div class="bg-white rounded-2xl p-8 mb-12">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose Our System?</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 card-hover rounded-xl border border-gray-200">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Secure & Reliable</h3>
+                        <p class="text-gray-600">Advanced security measures to protect student data and ensure result
+                            integrity.</p>
+                    </div>
+                    <div class="text-center p-6 card-hover rounded-xl border border-gray-200">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Instant Access</h3>
+                        <p class="text-gray-600">Students can access their results instantly with just their roll
+                            number.</p>
+                    </div>
+                    <div class="text-center p-6 card-hover rounded-xl border border-gray-200">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Easy Management</h3>
+                        <p class="text-gray-600">Administrators can easily add, edit, and manage student results
+                            efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section hidden py-12" style="padding-bottom: 107px;">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="glass-effect rounded-2xl p-8">
+                <h2 class="text-3xl font-bold text-white text-center mb-8">Check Your Results</h2>
+                <div class="bg-white rounded-xl p-6">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="rollNumber">
+                            Enter Your Roll Number / USN
+                        </label>
+                        <input type="text" id="rollNumber" placeholder="e.g., 2023001 or USN2023001"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <button onclick="checkResult()"
+                        class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-search mr-2"></i>View Result
+                    </button>
+                    <button onclick="showSection('home')"
+                        class="w-full mt-4 bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </button>
+                </div>
+
+                <div id="resultDisplay" class="mt-8 hidden">
+                    <div class="bg-white rounded-xl p-6">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800">Student Result</h3>
+                            <p class="text-gray-600" id="resultDate"></p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">Student Information</h4>
+                                <p><strong>Name:</strong> <span id="studentName"></span></p>
+                                <p><strong>Roll No:</strong> <span id="studentRoll"></span></p>
+                                <p><strong>Class:</strong> <span id="studentClass"></span></p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700 mb-2">Academic Details</h4>
+                                <p><strong>Grade:</strong> <span id="studentGrade"></span></p>
+                                <p><strong>Percentage:</strong> <span id="studentPercentage"></span></p>
+                                <p><strong>Status:</strong> <span id="studentStatus"></span></p>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full result-table">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                            Subject</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                            Marks</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                            Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subjectTable" class="bg-white divide-y divide-gray-200">
+                                    <!-- Subjects will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button onclick="showSection('results')"
+                            class="w-full mt-6 bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-search mr-2"></i>Check Another Result
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Login Section -->
+    <section id="admin" class="section hidden py-12" style="padding-bottom: 70px;">
+        <div class="max-w-md mx-auto px-4">
+            <div class="glass-effect rounded-2xl p-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Admin Login</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="adminUsername">
+                            Username
+                        </label>
+                        <input type="text" id="adminUsername" placeholder="Enter admin username"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="adminPassword">
+                            Password
+                        </label>
+                        <input type="password" id="adminPassword" placeholder="Enter password"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <button onclick="adminLogin()"
+                        class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </button>
+                    <button onclick="showSection('home')"
+                        class="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel (Hidden by default) -->
+    <section id="adminPanel" class="section hidden py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="glass-effect rounded-2xl p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-white">Admin Dashboard</h2>
+                    <button onclick="logout()"
+                        class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </div>
+
+                <!-- Add Student Form -->
+                <div class="bg-white rounded-xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Add New Student Result</h3>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Roll Number</label>
+                            <input type="text" id="newRoll" class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                                placeholder="Roll Number">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Student Name</label>
+                            <input type="text" id="newName" class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                                placeholder="Full Name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Class</label>
+                            <input type="text" id="newClass" class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                                placeholder="Class/Grade">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Grade</label>
+                            <input type="text" id="newGrade" class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                                placeholder="Overall Grade">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-4">Subjects & Marks</h4>
+                        <div id="subjectInputs">
+                            <div class="grid md:grid-cols-3 gap-4 mb-4">
+                                <input type="text" placeholder="Subject Name"
+                                    class="px-4 py-3 border border-gray-300 rounded-lg">
+                                <input type="number" placeholder="Marks"
+                                    class="px-4 py-3 border border-gray-300 rounded-lg" min="0" max="100">
+                                <input type="text" placeholder="Grade"
+                                    class="px-4 py-3 border border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                        <button onclick="addSubjectField()"
+                            class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Add Subject
+                        </button>
+                    </div>
+                    <button onclick="addStudent()"
+                        class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                        <i class="fas fa-save mr-2"></i>Save Student Result
+                    </button>
+                </div>
+
+                <!-- Student List -->
+                <div class="bg-white rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Manage Student Results</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full result-table">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-left">Roll No</th>
+                                    <th class="px-6 py-3 text-left">Name</th>
+                                    <th class="px-6 py-3 text-left">Class</th>
+                                    <th class="px-6 py-3 text-left">Grade</th>
+                                    <th class="px-6 py-3 text-left">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentList">
+                                <!-- Students will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fixed-footer bg-gray-600 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    <span class="text-lg font-bold">SRMS</span>
+                </div>
+                <div class="flex space-x-6">
+                    <button onclick="showSection('home')"
+                        class="text-gray-300 hover:text-white transition-colors">Home</button>
+                    <button onclick="showSection('results')"
+                        class="text-gray-300 hover:text-white transition-colors">Results</button>
+                    <button onclick="showSection('admin')"
+                        class="text-gray-300 hover:text-white transition-colors">Admin</button>
+                </div>
+                <div class="text-gray-300 text-sm mt-4 md:mt-0">
+                    &copy; 2024 SRMS. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize sample data if not exists
+        function initializeData() {
+            if (!localStorage.getItem('students')) {
+                const sampleStudents = [
+                    {
+                        rollNumber: '2023001',
+                        name: 'John Smith',
+                        className: '10th Grade',
+                        grade: 'A+',
+                        percentage: '92%',
+                        status: 'Pass',
+                        subjects: [
+                            { name: 'Mathematics', marks: 95, grade: 'A+' },
+                            { name: 'Science', marks: 88, grade: 'A' },
+                            { name: 'English', marks: 92, grade: 'A+' }
+                        ],
+                        date: '2024-01-15'
+                    },
+                    {
+                        rollNumber: '2023002',
+                        name: 'Sarah Johnson',
+                        className: '10th Grade',
+                        grade: 'A',
+                        percentage: '85%',
+                        status: 'Pass',
+                        subjects: [
+                            { name: 'Mathematics', marks: 82, grade: 'B+' },
+                            { name: 'Science', marks: 88, grade: 'A' },
+                            { name: 'English', marks: 85, grade: 'A' }
+                        ],
+                        date: '2024-01-15'
+                    }
+                ];
+                localStorage.setItem('students', JSON.stringify(sampleStudents));
+            }
+        }
+
+        // Show/hide sections
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+
+                // If showing results section, clear any previous results
+                if (sectionId === 'results') {
+                    document.getElementById('rollNumber').value = '';
+                    document.getElementById('resultDisplay').classList.add('hidden');
+                }
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Check student result
+        function checkResult() {
+            const rollNumber = document.getElementById('rollNumber').value.trim();
+            if (!rollNumber) {
+                alert('Please enter a roll number');
+                return;
+            }
+
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const student = students.find(s => s.rollNumber === rollNumber);
+
+            if (student) {
+                document.getElementById('studentName').textContent = student.name;
+                document.getElementById('studentRoll').textContent = student.rollNumber;
+                document.getElementById('studentClass').textContent = student.className;
+                document.getElementById('studentGrade').textContent = student.grade;
+                document.getElementById('studentPercentage').textContent = student.percentage;
+                document.getElementById('studentStatus').textContent = student.status;
+                document.getElementById('resultDate').textContent = `Result Date: ${student.date}`;
+
+                const subjectTable = document.getElementById('subjectTable');
+                subjectTable.innerHTML = '';
+                student.subjects.forEach(subject => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${subject.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${subject.marks}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${subject.grade}</td>
+                    `;
+                    subjectTable.appendChild(row);
+                });
+
+                document.getElementById('resultDisplay').classList.remove('hidden');
+            } else {
+                alert('No result found for this roll number');
+            }
+        }
+
+        // Admin login
+        function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            // Simple authentication (in real app, use proper authentication)
+            if (username === 'admin' && password === 'admin123') {
+                showSection('adminPanel');
+                loadStudentList();
+            } else {
+                alert('Invalid credentials. Use admin/admin123 for demo');
+            }
+        }
+
+        // Logout
+        function logout() {
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+            showSection('admin');
+        }
+
+        // Add subject field
+        function addSubjectField() {
+            const container = document.getElementById('subjectInputs');
+            const div = document.createElement('div');
+            div.className = 'grid md:grid-cols-3 gap-4 mb-4';
+            div.innerHTML = `
+                <input type="text" placeholder="Subject Name" class="px-4 py-3 border border-gray-300 rounded-lg">
+                <input type="number" placeholder="Marks" class="px-4 py-3 border border-gray-300 rounded-lg" min="0" max="100">
+                <input type="text" placeholder="Grade" class="px-4 py-3 border border-gray-300 rounded-lg">
+            `;
+            container.appendChild(div);
+        }
+
+        // Add new student
+        function addStudent() {
+            const rollNumber = document.getElementById('newRoll').value;
+            const name = document.getElementById('newName').value;
+            const className = document.getElementById('newClass').value;
+            const grade = document.getElementById('newGrade').value;
+
+            if (!rollNumber || !name || !className || !grade) {
+                alert('Please fill all required fields');
+                return;
+            }
+
+            const subjectInputs = document.querySelectorAll('#subjectInputs input');
+            const subjects = [];
+            for (let i = 0; i < subjectInputs.length; i += 3) {
+                const subjectName = subjectInputs[i].value;
+                const marks = subjectInputs[i + 1].value;
+                const subjectGrade = subjectInputs[i + 2].value;
+
+                if (subjectName && marks && subjectGrade) {
+                    subjects.push({
+                        name: subjectName,
+                        marks: parseInt(marks),
+                        grade: subjectGrade
+                    });
+                }
+            }
+
+            if (subjects.length === 0) {
+                alert('Please add at least one subject');
+                return;
+            }
+
+            const totalMarks = subjects.reduce((sum, subject) => sum + subject.marks, 0);
+            const percentage = ((totalMarks / (subjects.length * 100)) * 100).toFixed(2) + '%';
+            const status = subjects.every(s => s.marks >= 40) ? 'Pass' : 'Fail';
+
+            const newStudent = {
+                rollNumber,
+                name,
+                className,
+                grade,
+                percentage,
+                status,
+                subjects,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const existingIndex = students.findIndex(s => s.rollNumber === rollNumber);
+
+            if (existingIndex !== -1) {
+                students[existingIndex] = newStudent;
+            } else {
+                students.push(newStudent);
+            }
+
+            localStorage.setItem('students', JSON.stringify(students));
+            alert('Student result saved successfully!');
+            clearForm();
+            loadStudentList();
+        }
+
+        // Load student list in admin panel
+        function loadStudentList() {
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const table = document.getElementById('studentList');
+            table.innerHTML = '';
+
+            students.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">${student.rollNumber}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${student.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${student.className}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${student.grade}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button onclick="editStudent('${student.rollNumber}')" class="text-blue-600 hover:text-blue-800 mr-3">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="deleteStudent('${student.rollNumber}')" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Edit student
+        function editStudent(rollNumber) {
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const student = students.find(s => s.rollNumber === rollNumber);
+
+            if (student) {
+                document.getElementById('newRoll').value = student.rollNumber;
+                document.getElementById('newName').value = student.name;
+                document.getElementById('newClass').value = student.className;
+                document.getElementById('newGrade').value = student.grade;
+
+                // Clear existing subject inputs
+                document.getElementById('subjectInputs').innerHTML = '';
+
+                // Add subject inputs for each subject
+                student.subjects.forEach(subject => {
+                    addSubjectField();
+                    const inputs = document.querySelectorAll('#subjectInputs input');
+                    inputs[inputs.length - 3].value = subject.name;
+                    inputs[inputs.length - 2].value = subject.marks;
+                    inputs[inputs.length - 1].value = subject.grade;
+                });
+            }
+        }
+
+        // Delete student
+        function deleteStudent(rollNumber) {
+            if (confirm('Are you sure you want to delete this student record?')) {
+                const students = JSON.parse(localStorage.getItem('students') || '[]');
+                const filtered = students.filter(s => s.rollNumber !== rollNumber);
+                localStorage.setItem('students', JSON.stringify(filtered));
+                loadStudentList();
+            }
+        }
+
+        // Clear form
+        function clearForm() {
+            document.getElementById('newRoll').value = '';
+            document.getElementById('newName').value = '';
+            document.getElementById('newClass').value = '';
+            document.getElementById('newGrade').value = '';
+            document.getElementById('subjectInputs').innerHTML = `
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <input type="text" placeholder="Subject Name" class="px-4 py-3 border border-gray-300 rounded-lg">
+                    <input type="number" placeholder="Marks" class="px-4 py-3 border border-gray-300 rounded-lg" min="0" max="100">
+                    <input type="text" placeholder="Grade" class="px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeData();
+            showSection('home'); // Show home section by default
+        });
+    </script>
+</body>
+
+</html>
