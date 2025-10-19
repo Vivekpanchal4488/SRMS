@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Result Management System</title>
+    <title>SRMS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -83,11 +83,11 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-graduation-cap text-purple-600 text-2xl"></i>
-                    <span class="text-xl font-bold text-gray-800">SRMS</span>
+                    <a href="#top"><span class="text-xl font-bold text-gray-800 top">SRMS</span></a>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <button onclick="showSection('home')"
-                        class="text-gray-600 hover:text-purple-600 transition-colors font-semibold">Home</button>
+                        class="text-gray-600 hover:text-purple-600 transition-colors font-semibold #home">Home</button>
                     <button onclick="showSection('results')"
                         class="text-gray-600 hover:text-purple-600 transition-colors font-semibold">View
                         Results</button>
@@ -155,9 +155,11 @@
     </section>
 
     <!-- Results Section -->
-    <section id="results" class="section hidden py-12" style="padding-bottom: 107px;">
+    <section id="results" class="section hidden py-12"
+    style="margin: 0px 0px 63px 0px">
         <div class="max-w-4xl mx-auto px-4">
-            <div class="glass-effect rounded-2xl p-8">
+            <div class="glass-effect rounded-2xl p-8"
+            style="    padding: 76px 28px 70px 28px;">
                 <h2 class="text-3xl font-bold text-white text-center mb-8">Check Your Results</h2>
                 <div class="bg-white rounded-xl p-6">
                     <div class="mb-6">
@@ -228,9 +230,10 @@
     </section>
 
     <!-- Admin Login Section -->
-    <section id="admin" class="section hidden py-12" style="padding-bottom: 70px;">
+    <section id="admin" class="section hidden py-12" style="margin: 0px 0px 63px 0px">
         <div class="max-w-md mx-auto px-4">
-            <div class="glass-effect rounded-2xl p-8">
+            <div class="glass-effect rounded-2xl p-8"
+            style="    padding: 76px 28px 70px 28px;">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Admin Login</h2>
                 <div class="space-y-4">
                     <div>
@@ -350,7 +353,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center space-x-2 mb-4 md:mb-0">
                     <i class="fas fa-graduation-cap text-white text-xl"></i>
-                    <span class="text-lg font-bold">SRMS</span>
+                    <a href="#top"><span class="text-lg font-bold">SRMS</span></a>
                 </div>
                 <div class="flex space-x-6">
                     <button onclick="showSection('home')"
